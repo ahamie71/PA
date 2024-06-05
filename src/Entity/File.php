@@ -20,8 +20,8 @@ class File
     #[ORM\Column(length: 255)]
     private ?string $chemain = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $poids = null;
+    #[ORM\Column(type: 'bigint')]
+    private ?int $poids = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $ajoutfile = null;
@@ -61,15 +61,15 @@ class File
         return $this;
     }
 
-    public function getPoids(): ?string
+    public function getPoids(): ?int
     {
         return $this->poids;
     }
-
-    public function setPoids(string $poids): static
+    
+    public function setPoids(?int $poids): static
     {
         $this->poids = $poids;
-
+    
         return $this;
     }
 

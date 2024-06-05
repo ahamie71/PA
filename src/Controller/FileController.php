@@ -9,6 +9,7 @@ use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
@@ -75,4 +76,23 @@ class FileController extends AbstractController
                 'formats' => $distinctFormats,
             ]);
         }
+
+        #[Route('/file/{id}/delete', name: 'delete_file')]
+        public function delete(File $file, EntityManagerInterface $entityManager): Response
+        {
+            // Vérifiez si le fichier existe
+            if (!$file) {
+                throw $this->createNotFoundException('File not found');
+            }
+    
+            // Supprimez le fichier de la base de données
+            $entityManager->remove($file);
+            $entityManager->flush();
+    
+            // Redirigez vers la page précédente ou une autre page appropriée
+            return $this->redirectToRoute('app_file');
+        }
     }
+
+
+    
