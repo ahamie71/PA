@@ -20,13 +20,14 @@ class File
     #[ORM\Column(length: 255)]
     private ?string $chemain = null;
 
-    #[ORM\Column(type: 'bigint')]
+    #[ORM\Column(type: 'bigint', nullable: true)]
     private ?int $poids = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $ajoutfile = null;
 
-    #[ORM\Column(length: 255)]
+
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $format = null;
 
     #[ORM\ManyToOne(inversedBy: 'files')]
