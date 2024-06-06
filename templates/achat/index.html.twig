@@ -1,9 +1,12 @@
+
+
 {% extends 'base.html.twig' %}
 
-{% block title %}files{% endblock %}
-
+{% block title %}Achat d'espace supplémentaire{% endblock %}
 
 {% block body %}
+
+
 
 
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -29,7 +32,9 @@
 			
 				<!-- Logo -->
                 <div class="header-left">
-                    
+                    <a href="" class="logo">
+					
+					</a>
                 </div>
 				<!-- /Logo -->
 				
@@ -329,7 +334,7 @@
 				                  
 				                </div>
 				                <div class="nav-profile-text d-flex flex-column">
-                            <span class="font-weight-bold mb-2">{{ app.user.nom }} {{ app.user.prenom }}</span>
+                            <span class="font-weight-bold mb-2">{{ app.user.nom }} {{app.user.prenom }}</span>
                             <span class="text-white text-small">
                             {% if 'ROLE_ADMIN' in app.user.roles %}
                                 Admin
@@ -342,7 +347,7 @@
 				              </a>
 				            </li>
 							<li class="menu-title"> 
-								<span></span>
+								<span>Main</span>
 							</li>
 							
                             
@@ -357,6 +362,7 @@
 									<li><a href="projects-dashboard.html"></a></li>
 									<li><a href="">Statistiques</a></li>
 								</ul>
+
 								<li>
 									<a href="{{ path('app_logout') }}">
 										<i class="feather-log-out"></i>Deconnexion
@@ -370,6 +376,7 @@
                                 <li><a href="{{path('app_file')}}"> Mes Fichiers</a></li>
                                 <li><a href="{{path('app_import_file')}}">Importez des fichiers</a></li>
                                 <li><a href="{{path('app_statistique')}}">Statistiques</a></li>
+                                <li><a href="{{path('app_achat')}}">Acheter De l'espace</a></li>
                             </ul>
                         </li>
 
@@ -378,7 +385,6 @@
 								<i class="feather-log-out"></i>Deconnexion
 							</a>
 						</li>
-						
 
 
                             {% endif %}
@@ -394,24 +400,28 @@
 					</div>
                 </div>
             </div>
-			<!-- /Sidebar -->
-			
-			<!-- Page Wrapper -->
             <div class="page-wrapper">
-			
-
-{# Affichage des messages flash de succès #}
 
 
-				<!-- Page Content -->
-                <div class="content container-fluid">
+    <div class="content container-fluid">
+
+
+    <div id="flash-messages">
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>
 
                 	
 					
 					<!-- Page Header -->
 					
 					<!-- /Page Header -->
-					
+
 					<!-- Content Starts -->
 					<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 					<link rel="stylesheet" href="/resources/demos/style.css">
@@ -419,78 +429,41 @@
 					<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 											 <div class="row">
 												<div  class="col-md-12">
-													<div class="card mb-0"style="width: 1358px;margin-left: -180px;margin-top:40px;">
-														<div class= "card-body" >
+													<div class="card mb-0"style="width: 1358px;margin-left: -180px;">
+														<div class="card-body">
 															<div class="table-responsive">
 															
-													
-														<p>Vous pouvez importer des fichiers en utilisant le formulaire ci-dessous. Assurez-vous que le fichier que vous importez est au bon format.</p>
-														<p>Formats de fichiers pris en charge : Tout type de fichier</p>
-														<p>Il n'y a pas de limite maximale pour la taille des fichiers.</p>
-														<p>Cependant, veuillez noter que votre espace de stockage actuel est de 20 Go. Si vous avez besoin de plus d'espace, vous pouvez augmenter votre capacité de stockage en payant 20 euros pour obtenir 20 Go supplémentaires.</p>
-														<p>Vous pouvez importer autant de fichiers que nécessaire.</p>
-									
-										
-                                                            <form method="post" action="{{ path('app_import_file') }}" enctype="multipart/form-data">
-                                                            <!-- Votre formulaire -->
-                                
-                                                          <div class="form-group">
-                                                                <label for="file">Choose File</label>
-                                                                <input type="file" id="file" name="file" class="form-control-file">
-                                                            </div>
-                                                            <button type="submit" class="btn btn-primary">Upload</button>
-                                                        </form>
-	
+												
+    <h1>Achat d'espace supplémentaire</h1>
+    
+    <p>Le client peut acheter de l’espace supplémentaire pour stocker davantage de fichiers sur notre plateforme.</p>
 
-									
-									</div>
+    <p>Cet achat est proposé à un tarif fixe et avantageux : 20€ pour 20Go de stockage.</p>
 
-								
+    <p>Lors de l’achat d’un espace de stockage supplémentaire, les étapes suivantes seront effectuées :</p>
 
+    <ul>
+        <li>Le client recevra un email de confirmation pour lui notifier la réussite de son achat.</li>
+        <li>Une nouvelle facture sera automatiquement générée et disponible sur son compte utilisateur.</li>
+    </ul>
+
+    <p>Pour procéder à l'achat, veuillez cliquer sur le bouton ci-dessous :</p>
+    
+
+
+    {{ form_start(form) }}
+    {{ form_row(form.submit) }}
+    {{ form_end(form) }}
+
+
+
+			</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<!-- /Content End -->
-					
                 </div>
-				<!-- /Page Content -->
-				
             </div>
-			<!-- /Page Wrapper -->
-			
-
         </div>
-		<!-- /Main Wrapper -->
-
-		
-		<!--modal section starts here-->
-		
-
-
-							
-						
-   
-					
-										</div>
-
-										
-									</div>
-								</div>
-								
-							</div>	
-						</div>
-					</div>
-				</div>
-			</div>
-
-
-
-						
-		<!--theme settings-->
-      
-
-
-
 {% endblock %}
