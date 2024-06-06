@@ -500,10 +500,11 @@
                         <td>{{ file.format }}</td>
                         <td>{{ file.user ? file.user.prenom : 'N/A' }}</td>
                         <td class="">
-                       
-                        <a href="{{ path('delete_file', {'id': file.id}) }}" class="btn btn-sm btn-danger">
-                    <i class="fa-solid fa-trash"></i>Supprimer
-                </a>
+					<a href="{{ path('view_file', {'id': file.id}) }}"><i class="fa fa-eye" style="color: blue;"></i></a>
+				<a href="{{ path('download_file', {'id': file.id}) }}"><i class="fa fa-download"style="color:green;" ></i></a>&nbsp;
+             <a href="{{ path('delete_file', {'id': file.id}) }}" ><i class="fa fa-trash" style="color: red;"></i> </a>&nbsp;
+			
+
                 
                         </td>
                     </tr>																														                           				
@@ -544,8 +545,55 @@
 		
 		<!--modal section starts here-->
 		
+<style>
 
+	.filters {
+    display: flex;
+    align-items: center;
+}
 
+.filters input[type="text"],
+.filters select {
+    margin-right: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.filters select {
+    padding: 6px 8px;
+}
+
+.filters .btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.filters .btn:hover {
+    background-color: #0056b3;
+}
+
+/* Pour ajuster le style de la sélection lorsque le formulaire est trop petit */
+@media (max-width: 768px) {
+    .filters {
+        flex-wrap: wrap;
+    }
+    
+    .filters input[type="text"],
+    .filters select {
+        flex: 1 1 auto;
+        margin-bottom: 10px;
+    }
+    
+    .filters select {
+        margin-right: 0;
+    }
+}
+</style>
 							
 						
    

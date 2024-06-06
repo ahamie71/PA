@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
@@ -92,7 +94,39 @@ class FileController extends AbstractController
             // Redirigez vers la page précédente ou une autre page appropriée
             return $this->redirectToRoute('app_file');
         }
+
+
+        #[Route('/file/download/{id}', name: 'download_file')]
+        public function download(int $id): BinaryFileResponse
+        {
+            $file = $this->entityManager->getRepository(File::class)->find($id);
+    
+            if (!$file) {
+                throw $this->createNotFoundException('File not found');
+            }
+    
+            $filePath = $this->getParameter('kernel.project_dir') . '/public' . $file->getChemain();
+    
+            return $this->file($filePath, $file->getNom(), ResponseHeaderBag::DISPOSITION_ATTACHMENT);
+        }
+
+
+        #[Route('/file/{id}/view', name: 'view_file')]
+public function view(File $file): Response
+{
+    // Vérifie si le fichier existe
+    if (!$file) {
+        throw $this->createNotFoundException('File not found');
     }
+
+    // Récupère le chemin complet du fichier
+    $filePath = $this->getParameter('kernel.project_dir') . '/public' . $file->getChemain();
+
+    // Retourne une réponse pour afficher le fichier
+    return new BinaryFileResponse($filePath, 200, [], true);
+}
+    }
+    
 
 
     
