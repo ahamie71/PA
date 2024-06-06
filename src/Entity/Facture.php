@@ -35,6 +35,9 @@ class Facture
     #[ORM\Column]
     private ?int $montanttotalttc = null;
 
+    #[ORM\ManyToOne(inversedBy: 'factures')]
+    private ?Company $company = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,6 +123,18 @@ class Facture
     public function setMontanttotalttc(int $montanttotalttc): static
     {
         $this->montanttotalttc = $montanttotalttc;
+
+        return $this;
+    }
+
+    public function getCompany(): ?Company
+    {
+        return $this->company;
+    }
+
+    public function setCompany(?Company $company): static
+    {
+        $this->company = $company;
 
         return $this;
     }
