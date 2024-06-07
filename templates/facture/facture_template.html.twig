@@ -424,6 +424,7 @@
                     <th>Montant TVA</th>
                     <th>Montant total TTC</th>
                     <th>Company</th>
+					<th>Action</th>	
                 </tr>
             </thead>
             <tbody>
@@ -431,14 +432,19 @@
                     <tr>
                         <td>{{ facture.id }}</td>
                         <td>{{ facture.date|date('Y-m-d H:i:s') }}</td>
-                        <td>{{ facture.user.nom }}</td> {# Supposons que "user" est une relation avec l'entité User #}
+                        <td>{{ facture.user.prenom }}</td> {# Supposons que "user" est une relation avec l'entité User #}
                         <td>{{ facture.designation }}</td>
                         <td>{{ facture.prixunitaireht }}</td>
                         <td>{{ facture.quantite }}</td>
                         <td>{{ facture.montanttva }}</td>
                         <td>{{ facture.montanttotalttc }}</td>
-                        <td>{{ facture.company.nom }}</td> {# Supposons que "company" est une relation avec l'entité Company #}
+                        <td>{{ facture.company.nom }}</td> 
+						<td>	{# Supposons que "company" est une relation avec l'entité Company #}
+						<a href="{{ path('app_facture_pdf', {id: facture.id}) }}">Télécharger en PDF</a>
+					</td>
+					</th>
                     </tr>
+
                 {% endfor %}
             </tbody>
 

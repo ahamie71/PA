@@ -1,0 +1,83 @@
+{# facture/facture_pdf.html.twig #}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Facture</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1, h2, h3 {
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        .client, .societe, .details {
+            margin-bottom: 20px;
+        }
+        .articles {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .articles th, .articles td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+        .total {
+            text-align: right;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Facture</h1>
+        <div class="client">
+            <h3>Informations du Client</h3>
+            <p>{{ facture.user.nom }} {{ facture.user.prenom }}</p>
+            <p>{{ facture.user.adresse }}</p>
+        </div>
+        <div class="societe">
+            <h3>Informations de la Société</h3>
+            <p>{{ facture.company.nom }}</p>
+            <p>{{ facture.company.adresse }}</p>
+            <p>SIRET : {{ facture.company.siret }}</p>
+        </div>
+        <div class="details">
+            <h3>Détails de la Facture</h3>
+            <p>Date : {{ facture.date|date('d/m/Y') }}</p>
+            {# <p>Numéro : {{ facture.numero }}</p> #}
+        </div>
+        <div class="articles">
+            <h3>Articles</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Désignation</th>
+                        <th>Prix Unitaire HT</th>
+                        <th>Quantité</th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                        <tr>
+                            <td>{{ facture.designation }}</td>
+                            <td>{{ facture.prixunitaireht }}€</td>
+                            <td>{{ facture.quantite }}</td>
+                            
+                        </tr>
+                   
+                </tbody>
+            </table>
+        </div>
+        <div class="total">
+         
+            <p> Montant TVA : {{ facture.montanttva }}€</p>
+            <h3>Montant total TTC: {{ facture.montanttotalttc }}€</h3>
+        </div>
+    </div>
+</body>
+</html>
