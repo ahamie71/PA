@@ -366,8 +366,8 @@
 							   <li class="submenu">
                             <a href="#"><i class="feather-home"></i> <span>Profile</span> <span class="menu-arrow"></span></a>
                             <ul class="sub-menus">
-                          <li><a href="index.html">Mes infos</a></li>
-                                <li><a href="{{path('app_file')}}"> Mes Fichiers</a></li>
+						<li><a href="{{path('app_user_profile')}}">Mes infos</a></li>
+						<li><a href="{{path('app_file')}}"> Mes Fichiers</a></li>
 								<li><a href=""> Mes factures</a></li>
                                 <li><a href="{{path('app_import_file')}}">Importez des fichiers</a></li>
                                 
@@ -432,7 +432,15 @@
 														<p>Cependant, veuillez noter que votre espace de stockage actuel est de 20 Go. Si vous avez besoin de plus d'espace, vous pouvez augmenter votre capacité de stockage en payant 20 euros pour obtenir 20 Go supplémentaires.</p>
 														<p>Vous pouvez importer autant de fichiers que nécessaire.</p>
 									
-										
+															{% for label, messages in app.flashes %}
+															{% for message in messages %}
+																<div class="alert alert-{{ label == 'error' ? 'danger' : label }}">
+																	{{ message|raw }}
+																</div>
+															{% endfor %}
+														{% endfor %}
+
+              
                                                             <form method="post" action="{{ path('app_import_file') }}" enctype="multipart/form-data">
                                                             <!-- Votre formulaire -->
                                 

@@ -39,8 +39,13 @@ class ImportFileController extends AbstractController
                 }
     
                 // Convertir la taille en entier
-                $fileSize = intval($fileSize);
-                   
+              
+                $fileSizeMB = $fileSize / (1024 * 1024);
+                
+                if ($user->getStorageSpace() < $fileSizeMB) {
+                    $this->addFlash('error', "Espace de stockage insuffisant. Veuillez vous rendre sur la <a href='" . $this->generateUrl('app_achat') . "'>page d'achat d'espace de stockage</a>.");
+                    throw new \Exception("Espace de stockage insuffisant.");
+                }
                     $uploadedFile->move($uploadDirectory, $fileName);
                     // Créer une nouvelle entité File et définir son chemin de fichier
                     $file = new File();
@@ -49,15 +54,22 @@ class ImportFileController extends AbstractController
                     $file->setPoids($fileSize);
                     $file->setAjoutfile(new \DateTime());
                     $file->setFormat($uploadedFile->getClientOriginalExtension());
-                    $file->setUser($user);                
+                    $file->setUser($user);  
                     $entityManager->persist($file);
+                    $user->setStorageSpace($user->getStorageSpace() - $fileSizeMB);
+                    $entityManager->persist($user);
+
                     $entityManager->flush();
+                    
+                    $this->addFlash('success', 'Fichier téléchargé avec succès.');
+
                 } catch (\Exception $e) {
                    
 
+
                 }
             } else {
-                $this->addFlash('error', 'Aucun fichier n\'a été soumis.');
+                // $this->addFlash('error', 'Aucun fichier n\'a été soumis.');
             }
     
             return $this->render('import_file/index.html.twig');
