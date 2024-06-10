@@ -30,9 +30,6 @@ class FileController extends AbstractController
     public function index( EntityManagerInterface $entityManager, Request $request,FileRepository $fileRepository, Security $security): Response
    {
  
-        
-
-
             $user = $security->getUser();
             if (!$user) {
                 throw $this->createAccessDeniedException('You must be logged in to access this page.');
@@ -112,17 +109,12 @@ class FileController extends AbstractController
 
 
         #[Route('/file/{id}/view', name: 'view_file')]
-public function view(File $file): Response
-{
-    // Vérifie si le fichier existe
+       public function view(File $file): Response
+     {
     if (!$file) {
         throw $this->createNotFoundException('File not found');
     }
-
-    // Récupère le chemin complet du fichier
     $filePath = $this->getParameter('kernel.project_dir') . '/public' . $file->getChemain();
-
-    // Retourne une réponse pour afficher le fichier
     return new BinaryFileResponse($filePath, 200, [], true);
 }
     }
