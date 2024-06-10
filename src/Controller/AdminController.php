@@ -3,13 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\File;
+use App\Entity\User;
+use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AdminController extends AbstractController
 {
@@ -113,5 +116,45 @@ class AdminController extends AbstractController
 
         return $this->redirectToRoute('admin_files');
     }
+
+    #[Route('/admin/users', name: 'admin_user_list')]
+    public function listUsers(): Response
+    {
+        $users = $this->entityManager->getRepository(User::class)->findAll();
+
+        $userData = [];
+        foreach ($users as $user) {
+            $usedStorage = $this->getUsedStorageForUser($user);
+            $availableStorage = $user->getStoragespace() - $usedStorage;
+
+            $userData[] = [
+                'username' => $user->getPrenom(),
+                'nom' => $user->getNom(),
+                'used_storage' => $usedStorage,
+                'available_storage' => $availableStorage,
+            ];
+        }
+
+        return $this->render('admin/users.html.twig', [
+            'users' => $userData,
+        ]);
+    }
+
+    private function getUsedStorageForUser(User $user): float
+    {
+        $files = $this->entityManager->getRepository(File::class)->findBy(['user' => $user]);
+
+        $usedStorage = 0;
+        foreach ($files as $file) {
+            $usedStorage += $file->getPoids();
+        }
+
+        return $usedStorage;
+    }
+
 }
+
+
+
+
 
