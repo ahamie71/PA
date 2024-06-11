@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\File;
 use App\Entity\User;
 use App\Form\RegisterType;
+use App\Form\AdminUserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -152,7 +153,41 @@ class AdminController extends AbstractController
         return $usedStorage;
     }
 
+    #[Route('/admin/users/add', name: 'admin_user_add')]
+    public function addUser(Request $request ,EntityManagerInterface $entityManager,UserPasswordHasherInterface $encoder ): Response
+    {
+        $user = new User();
+        $form = $this->createForm(AdminUserType::class, $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $form->getData();
+            $user_find = $this->entityManager->getRepository(User::class)->findOneByEmail($user->getEmail());
+
+            if (!$user_find) {
+                // Hasher le mot de passe
+                $password = $encoder->hashPassword($user, $user->getPassword());
+                $user->setPassword($password);
+                $user->setDate(new \DateTime());
+                if ($form->get('storagespace')->getData()) {
+                    $user->setStoragespace(20);
+                    $user->setRoles(["ROLE_USER"]);
+                }
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
+            return $this->redirectToRoute('admin_user_list');
+        }
+    } else {
+        $this->addFlash('error', 'Cet utilisateur existe déjà.');
+    }
+        return $this->render('admin/add_user.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 }
+
+
 
 
 
