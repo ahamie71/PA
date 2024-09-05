@@ -1,20 +1,472 @@
+{# templates/stats/index.html.twig #}
+
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello StatistiqueController!{% endblock %}
-
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{# templates/profile/index.html.twig #}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/Users/ahmadhamieh/project_Annuel/src/Controller/StatistiqueController.php</code></li>
-        <li>Your template at <code>/Users/ahmadhamieh/project_Annuel/templates/statistique/index.html.twig</code></li>
-    </ul>
+
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+    <body id="skin-color" class="inter">
+	
+
+
+
+		<!-- Main Wrapper -->
+        <div class="main-wrapper">
+		
+			<!-- Header -->
+            <div class="header" id="heading">
+			
+				<!-- Logo -->
+                <div class="header-left">
+                    
+                </div>
+				<!-- /Logo -->
+				
+				<a id="toggle_btn" href="javascript:void(0);">
+					
+				</a>
+				
+				<!-- Header Title -->
+                <div class="page-title-box">
+					<div class="top-nav-search">
+							<a href="javascript:void(0);" class="responsive-search">
+								<i class="fa fa-search"></i>
+						   </a>
+							
+						</div>
+                </div>
+				<!-- /Header Title -->
+				
+				<a id="mobile_btn" class="mobile_btn" href="#sidebar"><i class="fa fa-bars"></i></a>
+				
+				<!-- Header Menu -->
+				<ul class="nav user-menu">
+				
+					<!-- Search -->
+					{# <li class="nav-item">
+						
+					</li>
+					<!-- /Search -->
+				
+					<!-- Flag -->
+					<li class="nav-item dropdown has-arrow flag-nav">
+						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button">
+							<img src="{{asset('img/flags/us.png')}}" alt="" height="20"> <span>English</span>
+						</a>
+						<div class="dropdown-menu dropdown-menu-right">
+							<a href="javascript:void(0);" class="dropdown-item">
+								<img src="{{asset('img/flags/us.png')}}" alt="" height="16"> English
+							</a>
+							<a href="javascript:void(0);" class="dropdown-item">
+								<img src="{{asset('img/flags/fr.png')}}" alt="" height="16"> French
+							</a>
+							<a href="javascript:void(0);" class="dropdown-item">
+								<img src="{{asset('img/flags/es.png')}}" alt="" height="16"> Spanish
+							</a>
+							<a href="javascript:void(0);" class="dropdown-item">
+								<img src="{{asset('img/flags/de.png')}}" alt="" height="16"> German
+							</a>
+						</div>
+					</li>
+					<!-- /Flag -->
+				
+					{# <!-- Notifications -->
+					<li class="nav-item dropdown">
+						<a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+							<i class="fa fa-bell-o"></i> <span class="badge rounded-pill">3</span>
+						</a>
+						<div class="dropdown-menu notifications">
+							<div class="topnav-dropdown-header">
+								<span class="notification-title">Notifications</span>
+								<a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+							</div>
+							<div class="noti-content">
+								<ul class="notification-list">
+									<li class="notification-message">
+										<a href="activities.html">
+											<div class="media d-flex">
+												<span class="avatar flex-shrink-0">
+													<img alt="" src="{{asset('img/profiles/avatar-02.jpg')}}">
+												</span>
+												<div class="media-body flex-grow-1">
+													<p class="noti-details"><span class="noti-title">John Doe</span> added new task <span class="noti-title">Patient appointment booking</span></p>
+													<p class="noti-time"><span class="notification-time">4 mins ago</span></p>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li class="notification-message">
+										<a href="activities.html">
+											<div class="media d-flex">
+												<span class="avatar flex-shrink-0">
+													<img alt="" src="{{asset('img/profiles/avatar-03.jpg')}}">
+												</span>
+												<div class="media-body flex-grow-1">
+													<p class="noti-details"><span class="noti-title">Tarah Shropshire</span> changed the task name <span class="noti-title">Appointment booking with payment gateway</span></p>
+													<p class="noti-time"><span class="notification-time">6 mins ago</span></p>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li class="notification-message">
+										<a href="activities.html">
+											<div class="media d-flex">
+												<span class="avatar flex-shrink-0">
+													<img alt="" src="{{asset('img/profiles/avatar-06.jpg')}}">
+												</span>
+												<div class="media-body flex-grow-1">
+													<p class="noti-details"><span class="noti-title">Misty Tison</span> added <span class="noti-title">Domenic Houston</span> and <span class="noti-title">Claire Mapes</span> to project <span class="noti-title">Doctor available module</span></p>
+													<p class="noti-time"><span class="notification-time">8 mins ago</span></p>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li class="notification-message">
+										<a href="activities.html">
+											<div class="media d-flex">
+												<span class="avatar flex-shrink-0">
+													<img alt="" src="{{asset('img/profiles/avatar-17.jpg')}}">
+												</span>
+												<div class="media-body flex-grow-1">
+													<p class="noti-details"><span class="noti-title">Rolland Webber</span> completed task <span class="noti-title">Patient and Doctor video conferencing</span></p>
+													<p class="noti-time"><span class="notification-time">12 mins ago</span></p>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li class="notification-message">
+										<a href="activities.html">
+											<div class="media d-flex">
+												<span class="avatar flex-shrink-0">
+													<img alt="" src="{{asset('img/profiles/avatar-13.jpg')}}">
+												</span>
+												<div class="media-body flex-grow-1">
+													<p class="noti-details"><span class="noti-title">Bernardo Galaviz</span> added new task <span class="noti-title">Private chat module</span></p>
+													<p class="noti-time"><span class="notification-time">2 days ago</span></p>
+												</div>
+											</div>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="topnav-dropdown-footer">
+								<a href="activities.html">View all Notifications</a>
+							</div>
+						</div>
+					</li> #}
+					<!-- /Notifications -->
+					
+					{# <!-- Message Notifications -->
+					<li class="nav-item dropdown">
+						<a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+							<i class="fa fa-comment-o"></i> <span class="badge rounded-pill">8</span>
+						</a>
+						<div class="dropdown-menu notifications">
+							<div class="topnav-dropdown-header">
+								<span class="notification-title">Messages</span>
+								<a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+							</div>
+							<div class="noti-content">
+								<ul class="notification-list">
+									<li class="notification-message">
+										<a href="#">
+											<div class="list-item">
+												<div class="list-left">
+													<span class="avatar">
+														<img alt="" src="{{asset('img/profiles/avatar-09.jpg')}}">
+													</span>
+												</div>
+												<div class="list-body">
+													<span class="message-author">Richard Miles </span>
+													<span class="message-time">12:28 AM</span>
+													<div class="clearfix"></div>
+													<span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li class="notification-message">
+										<a href="#">
+											<div class="list-item">
+												<div class="list-left">
+													<span class="avatar">
+														<img alt="" src="{{asset('img/profiles/avatar-02.jpg')}}">
+													</span>
+												</div>
+												<div class="list-body">
+													<span class="message-author">John Doe</span>
+													<span class="message-time">6 Mar</span>
+													<div class="clearfix"></div>
+													<span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li class="notification-message">
+										<a href="#">
+											<div class="list-item">
+												<div class="list-left">
+													<span class="avatar">
+														<img alt="" src="{{asset('img/profiles/avatar-03.jpg')}}">
+													</span>
+												</div>
+												<div class="list-body">
+													<span class="message-author"> Tarah Shropshire </span>
+													<span class="message-time">5 Mar</span>
+													<div class="clearfix"></div>
+													<span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li class="notification-message">
+										<a href="#">
+											<div class="list-item">
+												<div class="list-left">
+													<span class="avatar">
+														<img alt="" src="{{asset('img/profiles/avatar-05.jpg')}}">
+													</span>
+												</div>
+												<div class="list-body">
+													<span class="message-author">Mike Litorus</span>
+													<span class="message-time">3 Mar</span>
+													<div class="clearfix"></div>
+													<span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li class="notification-message">
+										<a href="#">
+											<div class="list-item">
+												<div class="list-left">
+													<span class="avatar">
+														<img alt="" src="{{asset('img/profiles/avatar-08.jpg')}}">
+													</span>
+												</div>
+												<div class="list-body">
+													<span class="message-author"> Catherine Manseau </span>
+													<span class="message-time">27 Feb</span>
+													<div class="clearfix"></div>
+													<span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+												</div>
+											</div>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="topnav-dropdown-footer">
+								<a href="#">View all Messages</a>
+							</div>
+						</div>
+					</li>
+					<!-- /Message Notifications --> #} 
+
+				{# {% if 'ROLE_ADMIN' in app.user.roles %}
+					<li class="nav-item dropdown has-arrow main-drop">
+						<a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+							
+								<span class="status online"></span>
+							</span>
+							<span>{{ app.user.nom}} {{ app.user.prenom}}</span>
+						</a>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="profile.html">My Profile</a>
+							<a class="dropdown-item" href="settings.html">Settings</a>
+							<a class="dropdown-item" href="{{ path('user_create') }}">New user</a>
+							<a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a>
+						</div>
+					</li>
+				{% elseif 'ROLE_COMMERCIAL' in app.user.roles or 'ROLE_TELEPRO' in app.user.roles %}
+				<li class="nav-item dropdown has-arrow main-drop">
+				<a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+					
+						<span class="status online"></span>
+					</span>
+				<span>{{ app.user.nom}} {{ app.user.prenom}}</span>
+				</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="profile.html">My Profile</a>
+					<a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a>
+				</div>
+				</li>
+
+				{% endif %} #}
+				</ul>
+				<!-- /Header Menu -->
+				
+				<!-- Mobile Menu -->
+				
+				<!-- /Mobile Menu -->
+				
+            </div>
+			<!-- /Header -->
+			
+			<!-- Sidebar -->
+            <div class="sidebar" id="sidebar">
+                <div class="sidebar-inner slimscroll">
+                	<form action="search.html" class="mobile-view">
+						<input class="form-control" type="text" placeholder="Search here">
+						<button class="btn" type="button"><i class="fa fa-search"></i></button>
+					</form>
+					<div id="sidebar-menu" class="sidebar-menu">
+						<ul>
+							<li class="nav-item nav-profile">
+				              <a href="#" class="nav-link">
+				                <div class="nav-profile-image">
+				                  <img src="{{asset('img/profiles/avatar-17.jpg')}}" alt="profile">
+				                  
+				                </div>
+				                <div class="nav-profile-text d-flex flex-column">
+                            <span class="font-weight-bold mb-2">{{ app.user.nom }} {{ app.user.prenom }}</span>
+                            <span class="text-white text-small">
+                            {% if 'ROLE_ADMIN' in app.user.roles %}
+                                Admin
+                            {% elseif 'ROLE_USER' in app.user.roles %}
+                                User
+                          
+                            {% endif %}
+                        </span>				                </div>
+				                <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+				              </a>
+				            </li>
+							<li class="menu-title"> 
+								<span></span>
+							</li>
+							
+                            
+                            {% if 'ROLE_ADMIN' in app.user.roles %}
+
+                            <li class="submenu">
+								<a href="#"><i class="feather-home"></i> <span>Admin</span> <span class="menu-arrow"></span></a>
+								<ul class="sub-menus">
+                            <li><a href="{{path('admin_user_list')}}">les clients</a></li>
+                            <li><a href="{{path('admin_user_add')}}">Ajoutez un user </a></li>
+                           <li><a href="{{path('admin_files')}}">les fichiers des clients</a></li>
+                           <li><a href="{{path('app_statistique')}}">Statistiques</a></li>
+								</ul>
+								<li>
+									<a href="{{ path('app_logout') }}">
+										<i class="feather-log-out"></i>Deconnexion
+									</a>
+								</li>
+                               {% else %}
+							   <li class="submenu">
+                            <a href="#"><i class="feather-home"></i> <span>Profile</span> <span class="menu-arrow"></span></a>
+                            <ul class="sub-menus">
+                        <li><a href="{{path('app_user_profile')}}">Mes infos</a></li>
+                        <li><a href="{{path('app_file')}}"> Mes Fichiers</a></li>
+								<li><a href=""> Mes factures</a></li>
+                                <li><a href="{{path('app_import_file')}}">Importez des fichiers</a></li>
+                                
+                                <li><a href="{{path('app_achat')}}">Acheter De l'espace</a></li>
+                            </ul>
+                        </li>
+
+						<li>
+							<a href="{{ path('app_logout') }}">
+								<i class="feather-log-out"></i>Deconnexion
+							</a>
+						</li>
+						
+
+
+                            {% endif %}
+                            
+							
+							
+							
+							
+							
+								</ul>
+							</li>
+						</ul>
+					</div>
+                </div>
+            </div>
+			<!-- /Sidebar -->
+			
+			<!-- Page Wrapper -->
+            <div class="page-wrapper">
+			
+
+{# Affichage des messages flash de succès #}
+
+
+				<!-- Page Content -->
+                <div class="content container-fluid">
+
+                	
+					
+					<!-- Page Header -->
+					
+					<!-- /Page Header -->
+					
+					<!-- Content Starts -->
+					<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+					<link rel="stylesheet" href="/resources/demos/style.css">
+					<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+					<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+											 <div class="row">
+												<div  class="col-md-12">
+													<div class="card mb-0"style="width: 1358px;margin-left: -180px;margin-top:40px;">
+														<div class= "card-body" >
+															<div class="table-responsive">
+    
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Statistiques des Fichiers</h1>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-dark bg-primary mb-3">
+                <div class="card-header">Total des fichiers uploadés</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ total_files }}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-dark bg-success mb-3">
+                <div class="card-header">Fichiers uploadés aujourd'hui</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ today_files }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="mt-4">Répartition par utilisateur</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Utilisateur</th>
+                    <th>Nombre de fichiers</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in files_by_user %}
+                    <tr>
+                        <td>{{ user.user_name }}</td>
+                        <td>{{ user.file_count }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}

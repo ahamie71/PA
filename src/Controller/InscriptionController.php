@@ -23,6 +23,9 @@ class InscriptionController extends AbstractController
     }
      
 
+
+    
+
     #[Route('/inscription', name: 'app_inscription')]
     public function index(Request $request ,UserPasswordHasherInterface $encoder): Response
     {
@@ -60,4 +63,8 @@ class InscriptionController extends AbstractController
         ]);
     
     }
+
+
+
+
 }
