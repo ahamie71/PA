@@ -11,6 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+
 
 class ProfileType extends AbstractType
 {
@@ -58,6 +60,12 @@ class ProfileType extends AbstractType
                 'label' => "Modifier",
                 'attr' => [
                     'class' => 'btn w-100 text-white mt-2 btn-lg bg-success',
+                ],
+            ])->add('delete', ButtonType::class, [
+                'label' => "Supprimer le compte",
+                'attr' => [
+                    'class' => 'btn w-100 text-white mt-2 btn-lg bg-danger',
+                    'onclick' => 'confirmDelete()',
                 ],
             ]);
     }

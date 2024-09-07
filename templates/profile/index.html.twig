@@ -441,7 +441,18 @@
         {{ form_row(form.roles) }}
         {{ form_row(form.date) }}
         {{ form_row(form.storagespace) }}
-       
+      
 
     {{ form_end(form) }}
+	  <script>
+        function confirmDelete() {
+            if (confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.')) {
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = '{{ path('app_user_delete') }}';
+                document.body.appendChild(form);
+                form.submit();
+            }
+        }
+    </script>
 {% endblock %}
