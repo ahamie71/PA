@@ -78,13 +78,15 @@ class AchatController extends AbstractController
             // Enregistrer le PDF généré dans une variable
             $pdfOutput = $dompdf->output();
 
+            $nomFichierPDF = 'facture_' . $user->getNom() . '_' . (new \DateTime())->format('Ymd_His') . '.pdf';
+
             // Envoi de l'e-mail de confirmation avec la facture attachée
             $email = (new Email())
                 ->from('no-reply@example.com')  // Remplacez par votre adresse e-mail d'expéditeur
                 ->to($user->getEmail())  // Utilisez l'adresse e-mail de l'utilisateur connecté
                 ->subject('Votre achat a été effectué avec succès')
                 ->text('Merci pour votre achat ! Veuillez trouver votre facture ci-jointe.')
-                ->attach($pdfOutput, 'facture_'.$user->getNom().'.pdf', 'application/pdf');
+                ->attach($pdfOutput, $nomFichierPDF, 'application/pdf');
 
             $mailer->send($email);
 
